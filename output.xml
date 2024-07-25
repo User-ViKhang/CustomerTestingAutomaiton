@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.8.10 on win32)" generated="2024-07-25T10:57:42.635598" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Cases" source="P:\RobotFramework\robot_example_yaml_simple\test_cases.robot">
+<test id="s1-t1" name="Create Customer From CSV" line="9">
+<kw name="Read CSV File">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2024-07-25T10:57:42.690044" level="INFO" html="true">Getting file '&lt;a href="file://P:\RobotFramework\robot_example_yaml_simple\test_data.csv"&gt;P:\RobotFramework\robot_example_yaml_simple\test_data.csv&lt;/a&gt;'.</msg>
+<msg time="2024-07-25T10:57:42.690044" level="INFO">${content} = name,email,phone
+Alice,alice@example.com,123456789
+Bob,bob@example.com,987654321</msg>
+<var>${content}</var>
+<arg>${filename}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.000000"/>
+</kw>
+<kw name="Split To Lines" owner="String">
+<msg time="2024-07-25T10:57:42.690044" level="INFO">3 lines returned</msg>
+<msg time="2024-07-25T10:57:42.690044" level="INFO">${lines} = ['name,email,phone', 'Alice,alice@example.com,123456789', 'Bob,bob@example.com,987654321']</msg>
+<var>${lines}</var>
+<arg>${content}</arg>
+<doc>Splits the given string to lines.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.000000"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2024-07-25T10:57:42.690044" level="INFO">${data} = []</msg>
+<var>${data}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.000000"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Split String" owner="String">
+<msg time="2024-07-25T10:57:42.690044" level="INFO">${split_line} = ['Alice', 'alice@example.com', '123456789']</msg>
+<var>${split_line}</var>
+<arg>${line}</arg>
+<arg>,</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-07-25T10:57:42.690044" level="INFO">['Alice', 'alice@example.com', '123456789']</msg>
+<arg>${split_line}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${data}</arg>
+<arg>${split_line}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.006517"/>
+</kw>
+<var name="${line}">Alice,alice@example.com,123456789</var>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.006517"/>
+</iter>
+<iter>
+<kw name="Split String" owner="String">
+<msg time="2024-07-25T10:57:42.697913" level="INFO">${split_line} = ['Bob', 'bob@example.com', '987654321']</msg>
+<var>${split_line}</var>
+<arg>${line}</arg>
+<arg>,</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.697913" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-07-25T10:57:42.697913" level="INFO">['Bob', 'bob@example.com', '987654321']</msg>
+<arg>${split_line}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.697913" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${data}</arg>
+<arg>${split_line}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.697913" elapsed="0.000000"/>
+</kw>
+<var name="${line}">Bob,bob@example.com,987654321</var>
+<status status="PASS" start="2024-07-25T10:57:42.697913" elapsed="0.000000"/>
+</iter>
+<var>${line}</var>
+<value>@{lines}[1:]</value>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.007869"/>
+</for>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2024-07-25T10:57:42.697913" elapsed="0.000000"/>
+</return>
+<msg time="2024-07-25T10:57:42.697913" level="INFO">${data} = [['Alice', 'alice@example.com', '123456789'], ['Bob', 'bob@example.com', '987654321']]</msg>
+<var>${data}</var>
+<arg>test_data.csv</arg>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.007869"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-07-25T10:57:42.699635" level="INFO">${customer} = {'name': 'Alice', 'email': 'alice@example.com', 'phone': '123456789'}</msg>
+<var>${customer}</var>
+<arg>name=${record}[0]</arg>
+<arg>email=${record}[1]</arg>
+<arg>phone=${record}[2]</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.699635" elapsed="0.000000"/>
+</kw>
+<kw name="Add Customer" owner="CustomerLib">
+<arg>${customer}</arg>
+<status status="PASS" start="2024-07-25T10:57:42.699635" elapsed="0.000000"/>
+</kw>
+<kw name="Customer Should Be Saved">
+<kw name="Get Customer" owner="CustomerLib">
+<msg time="2024-07-25T10:57:42.699635" level="INFO">${exist_customer} = {'name': 'Alice', 'email': 'alice@example.com', 'phone': '123456789'}</msg>
+<var>${exist_customer}</var>
+<arg>${customer['email']}</arg>
+<status status="PASS" start="2024-07-25T10:57:42.699635" elapsed="0.000000"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2024-07-25T10:57:42.699635" level="INFO">Length is 3.</msg>
+<arg>${exist_customer}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.699635" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2024-07-25T10:57:42.699635" level="INFO">Argument types are:
+&lt;class 'robot.utils.dotdict.DotDict'&gt;
+&lt;class 'dict'&gt;</msg>
+<arg>${customer}</arg>
+<arg>${exist_customer}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.699635" elapsed="0.000000"/>
+</kw>
+<arg>${customer}</arg>
+<status status="PASS" start="2024-07-25T10:57:42.699635" elapsed="0.000000"/>
+</kw>
+<var name="${record}">['Alice', 'alice@example.com', '123456789']</var>
+<status status="PASS" start="2024-07-25T10:57:42.699635" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-07-25T10:57:42.707251" level="INFO">${customer} = {'name': 'Bob', 'email': 'bob@example.com', 'phone': '987654321'}</msg>
+<var>${customer}</var>
+<arg>name=${record}[0]</arg>
+<arg>email=${record}[1]</arg>
+<arg>phone=${record}[2]</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.707251" elapsed="0.000000"/>
+</kw>
+<kw name="Add Customer" owner="CustomerLib">
+<arg>${customer}</arg>
+<status status="PASS" start="2024-07-25T10:57:42.707793" elapsed="0.000000"/>
+</kw>
+<kw name="Customer Should Be Saved">
+<kw name="Get Customer" owner="CustomerLib">
+<msg time="2024-07-25T10:57:42.710461" level="INFO">${exist_customer} = {'name': 'Bob', 'email': 'bob@example.com', 'phone': '987654321'}</msg>
+<var>${exist_customer}</var>
+<arg>${customer['email']}</arg>
+<status status="PASS" start="2024-07-25T10:57:42.707793" elapsed="0.002668"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2024-07-25T10:57:42.712664" level="INFO">Length is 3.</msg>
+<arg>${exist_customer}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.710461" elapsed="0.002203"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2024-07-25T10:57:42.712664" level="INFO">Argument types are:
+&lt;class 'robot.utils.dotdict.DotDict'&gt;
+&lt;class 'dict'&gt;</msg>
+<arg>${customer}</arg>
+<arg>${exist_customer}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-07-25T10:57:42.712664" elapsed="0.000000"/>
+</kw>
+<arg>${customer}</arg>
+<status status="PASS" start="2024-07-25T10:57:42.707793" elapsed="0.004871"/>
+</kw>
+<var name="${record}">['Bob', 'bob@example.com', '987654321']</var>
+<status status="PASS" start="2024-07-25T10:57:42.707251" elapsed="0.005413"/>
+</iter>
+<var>${record}</var>
+<value>@{data}</value>
+<status status="PASS" start="2024-07-25T10:57:42.699635" elapsed="0.013029"/>
+</for>
+<doc>Create customers from CSV file and save to JSON file</doc>
+<tag>Create</tag>
+<status status="PASS" start="2024-07-25T10:57:42.690044" elapsed="0.022620"/>
+</test>
+<status status="PASS" start="2024-07-25T10:57:42.635598" elapsed="0.079046"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">Create</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Test Cases">Test Cases</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
