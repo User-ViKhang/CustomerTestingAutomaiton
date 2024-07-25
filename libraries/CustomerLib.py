@@ -10,9 +10,10 @@ class CustomerLib:
         dict_customer = self.ReadCSVFile(customer)
         self.WriteToJson(dict_customer, self.json_file)
         with open(customer, 'r') as file:
-            csv_reader = json.DictReader(file)
+            csv_reader = csv.DictReader(file)
             data = [row for row in csv_reader]
             return data
+        
     def GetCustomer(self, email):  # get customer by email
         try:
             with open(self.json_file, 'r') as file:

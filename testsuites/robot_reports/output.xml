@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.8.10 on win32)" generated="2024-07-25T16:14:11.965458" rpa="false" schemaversion="5">
+<suite id="s1" name="Customer.Testcase" source="P:\RobotFramework\robot_example_yaml_simple\testsuites\customer.testcase.robot">
+<test id="s1-t1" name="Create Customer From CSV" line="6">
+<kw name="Create Customer" owner="customer.keyword">
+<kw name="Add Customer" owner="CustomerLib">
+<msg time="2024-07-25T16:14:12.030930" level="INFO">@{data} = [ {'name': 'Alice', 'email': 'alice@example.com', 'phone': '123456789'} | {'name': 'Bob', 'email': 'bob@example.com', 'phone': '987654321'} ]</msg>
+<var>@{data}</var>
+<arg>${customer_file}</arg>
+<status status="PASS" start="2024-07-25T16:14:12.028102" elapsed="0.002828"/>
+</kw>
+<arg>../data/test_data.csv</arg>
+<status status="PASS" start="2024-07-25T16:14:12.026595" elapsed="0.004335"/>
+</kw>
+<doc>Create customers from CSV file and save to JSON file</doc>
+<status status="PASS" start="2024-07-25T16:14:12.025310" elapsed="0.005620"/>
+</test>
+<test id="s1-t2" name="Read CSV file" line="10">
+<kw name="Read File CSV" owner="customer.keyword">
+<kw name="Read CSV File" owner="CustomerLib">
+<msg time="2024-07-25T16:14:12.037392" level="INFO">@{data} = [ {'name': 'Alice', 'email': 'alice@example.com', 'phone': '123456789'} | {'name': 'Bob', 'email': 'bob@example.com', 'phone': '987654321'} ]</msg>
+<var>@{data}</var>
+<arg>${csv_file}</arg>
+<status status="PASS" start="2024-07-25T16:14:12.036048" elapsed="0.001344"/>
+</kw>
+<arg>../data/test_data.csv</arg>
+<status status="PASS" start="2024-07-25T16:14:12.036048" elapsed="0.001344"/>
+</kw>
+<doc>Read file CSV</doc>
+<status status="PASS" start="2024-07-25T16:14:12.034036" elapsed="0.003356"/>
+</test>
+<status status="PASS" start="2024-07-25T16:14:11.968558" elapsed="0.076276"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="Customer.Testcase">Customer.Testcase</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
